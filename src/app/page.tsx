@@ -7,7 +7,7 @@ import { NetworkInfo } from "@/components/NetworkInfo";
 import { TopBanner } from "@/components/TopBanner";
 import { TransferAPT } from "@/components/TransferAPT";
 import { WalletDetails } from "@/components/WalletDetails";
-// Internal Components
+import { FeedbackForm } from "@/components/FeedbackForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
@@ -16,9 +16,9 @@ function App() {
 
   return (
     <>
-    <TopBanner />
+      <TopBanner />
       <Header />
-      <div className="flex items-center justify-center flex-col">
+      <div className="flex items-center justify-center flex-col gap-6">
         {connected ? (
           <Card>
             <CardContent className="flex flex-col gap-10 pt-6">
@@ -34,6 +34,7 @@ function App() {
             <CardTitle>To get started Connect a wallet</CardTitle>
           </CardHeader>
         )}
+        <FeedbackForm />
       </div>
     </>
   );
