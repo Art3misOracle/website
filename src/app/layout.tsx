@@ -7,9 +7,7 @@ import { ReactQueryProvider } from "@/components/ReactQueryProvider";
 import { WalletProvider } from "@/components/WalletProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { WrongNetworkAlert } from "@/components/WrongNetworkAlert";
-
 import "./globals.css";
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.art3mis.xyz"),
   applicationName: "Art3MisOracle",

@@ -216,7 +216,7 @@ export function WalletSelector() {
         </DropdownMenuContent>
       </DropdownMenu>
       <div
-        className="cursor-pointer relative ml-2"
+        className="hidden md:block cursor-pointer md:relative ml-2"
         style={{
           width: "clamp(106px, calc(212 / 1920 * 100vw), 212px)",
           aspectRatio: "212/80",
