@@ -13,10 +13,10 @@ import { mintCard, MintCardArguments } from "@/entry-functions/mintCard";
 import { aptosClient } from "@/utils/aptosClient";
 import dynamic from "next/dynamic";
 import { MODULE_ADDRESS } from "@/constants";
-import FireLeft from "@/components/FireLeft";
-import FireRight from "@/components/FireRight";
-
-const FireAnimation = dynamic(() => import("@/components/FireAnimation"), {
+const FireLeft = dynamic(() => import("@/components/FireLeft"), {
+  ssr: false,
+});
+const FireRight = dynamic(() => import("@/components/FireRight"), {
   ssr: false,
 });
 
