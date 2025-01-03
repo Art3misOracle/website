@@ -7,6 +7,7 @@ import { NetworkInfo } from "@/components/NetworkInfo";
 import { TopBanner } from "@/components/TopBanner";
 import { TransferAPT } from "@/components/TransferAPT";
 import { WalletDetails } from "@/components/WalletDetails";
+import { FeedbackForm } from "@/components/FeedbackForm";
 // Internal Components
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
@@ -34,6 +35,10 @@ function App() {
             <CardTitle>To get started Connect a wallet</CardTitle>
           </CardHeader>
         )}
+      </div>
+      <div className="p-4 flex items-center justify-center flex-col">
+        <h2 className="text-lg font-medium">Feedback</h2>
+        <FeedbackForm />
       </div>
     </>
   );
