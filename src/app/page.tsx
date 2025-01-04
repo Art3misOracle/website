@@ -269,26 +269,32 @@ art3mis.xyz
   };
 
   return (
-    <div className="w-full h-screen bg-black flex flex-col items-center justify-center ">
+    <div className="w-full min-h-[calc(100vh-3.5rem)] md:h-screen bg-black flex flex-col items-center justify-center">
       {bgLoading ? (
-        <div className="w-full h-screen bg-black animate-pulse">
+        <div className="w-full min-h-[calc(100vh-3.5rem)] md:h-screen bg-black animate-pulse">
           <Loading />
         </div>
       ) : (
-        <div className="relative w-full h-screen flex flex-col">
+        <div className="relative w-full min-h-[calc(100vh-3.5rem)] md:h-screen flex flex-col">
           {loading && <Loading />}
           {(showTable || showCardList) && (
             <div className="fixed inset-0 bg-black opacity-60 z-10" />
           )}
-          <div className="relative w-full h-screen flex flex-col">
+          <div className="relative w-full min-h-[calc(100vh-3.5rem)] md:h-screen flex flex-col">
             {/* Background Image */}
+
+            <Image
+              src="/images/bg_mobile.png"
+              alt="background"
+              fill
+              className="md:hidden absolute top-0 left-0 w-full h-full object-fill"
+            />
 
             <Image
               src="/images/bg.webp"
               alt="background"
               fill
-              // className="absolute object-cover w-full h-full "
-              className="absolute top-0 left-0 w-full h-full object-cover md:object-fill "
+              className="hidden md:block absolute top-0 left-0 w-full h-full object-cover md:object-fill "
             />
             {/* fire animation */}
 
@@ -313,8 +319,8 @@ art3mis.xyz
             <div className="flex flex-1 flex-col items-center justify-center gap-6 px-4">
               {!showTips && !showTable && !showCardList && (
                 <div
-                  className="absolute flex flex-col md:flex-row justify-center items-center z-10 w-full md:w-auto 
-                               left-0 md:left-[20%] top-[50%] md:top-[80%] transform -translate-y-1/2"
+                  className="absolute flex md:flex-row justify-center items-center z-10 w-full md:w-auto 
+                               md:left-[20%] top-[85%] md:top-[80%] transform -translate-y-1/2 "
                 >
                   {/* AskCat container - Responsive sizing */}
                   <div className="w-[120px] md:w-[140px] lg:w-[220px] aspect-[120/160]">
@@ -324,7 +330,7 @@ art3mis.xyz
                   {/* Text and button container */}
                   <div className="flex flex-col gap-4 justify-center items-center mt-4 md:mt-0">
                     {/* Text box - Responsive width and font size */}
-                    <div className="w-full max-w-[300px] md:hidden md:max-w-[846px] px-3">
+                    {/* <div className="w-full max-w-[300px] md:hidden md:max-w-[846px] px-3">
                       <div
                         className="font-irishGrover py-2 w-full border bg-opacity-20 bg-black backdrop-blur-sm 
                                     border-[#C77F7F] shadow-[0_2px_8px_1px_#C77F7F] md:whitespace-nowrap text-wrap  rounded-md text-[#f5be66] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.1rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap blur-[0.6px] px-4 "
@@ -332,27 +338,37 @@ art3mis.xyz
                         Welcome, seeker of truth. The cards await your fate.
                         Shall we begin?
                       </div>
-                    </div>
+                    </div> */}
 
                     {/* mobile  */}
 
                     <div
-                      className="relative hidden md:block  h-auto md:w-[623px]  "
+                      className="relative"
                       style={{
-                        width: "clamp(423px, calc(846 / 1920 * 100vw), 846px)",
+                        width: "clamp(180px, calc(846 / 1920 * 100vw), 846px)",
                         aspectRatio: "423/44",
                       }}
                     >
+                      <Image
+                        src="/images/ask_box_mobile.png"
+                        alt="Ask"
+                        width={423}
+                        height={44}
+                        sizes="423px"
+                        className="w-full h-full md:hidden"
+                        priority
+                      />
+
                       <Image
                         src="/images/ask_box.webp"
                         alt="Ask"
                         width={423}
                         height={44}
                         sizes="423px"
-                        className="w-full h-full "
+                        className="w-full h-full hidden md:block"
                         priority
                       />
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#f5be66] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.1rem] font-bold [text-shadow:1px_1px_5px_black] md:whitespace-nowrap blur-[0.6px] px-4 py-2 rounded">
+                      <div className="absolute top-1/2 md:left-1/2 md:-translate-x-1/2 -translate-y-1/2 text-[#f5be66] text-[0.68rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.1rem] font-bold [text-shadow:1px_1px_5px_black] md:whitespace-nowrap blur-[0.4px] md:blur-[0.6px] px-4 py-2 rounded">
                         Welcome, seeker of truth. The cards await your fate.
                         Shall we begin?
                       </div>
@@ -379,15 +395,11 @@ art3mis.xyz
               )}
               {showTips && (
                 <div
-                  className="md:absolute md:mt-0 mt-40 flex flex-row p-2 ml-[-50px] justify-center items-center z-10"
-                  style={{
-                    left: "calc(480 / 1920 * 100%)",
-                    top: "calc(662 /1080 * 100%)",
-                    height: "auto",
-                  }}
+                  className="absolute md:mt-0 flex flex-row justify-center items-center w-full md:w-auto 
+                            md:left-[25%] top-[85%] md:top-[80%] transform -translate-y-1/2 p-2 z-10"
                 >
                   <div
-                    className="relative  "
+                    className="relative"
                     style={{
                       width: "clamp(120px, calc(240 / 1920 * 100vw), 240px)",
                       aspectRatio: "120/160",
@@ -496,7 +508,7 @@ art3mis.xyz
                     />
                     {showRevealBtn && (
                       <motion.div
-                        className="absolute flex justify-center items-center z-10 bottom-4 md:top-2/3 transform -translate-x-1/2"
+                        className="absolute flex justify-center items-center z-10 top-2/3 transform -translate-x-1/2"
                         initial={{ y: "100%" }}
                         animate={{ y: 0 }}
                         transition={{
@@ -507,7 +519,7 @@ art3mis.xyz
                         }}
                       >
                         <div
-                          className="relative w-full "
+                          className="relative w-full"
                           style={{
                             width:
                               "clamp(120px, calc(240 / 1920 * 100vw), 240px)",
@@ -767,11 +779,11 @@ art3mis.xyz
                     left: `calc(1375.5 / 1920 * 100%)`,
                     top:
                       window.innerWidth < 768
-                        ? `10%`
+                        ? `16%`
                         : `calc(482.5 / 1080 * 100%)`, // Mobile logic
                     transform:
                       window.innerWidth < 768
-                        ? "translate(-150%, 0%) scale(1)" // Center horizontally and move up
+                        ? "translate(-135%, 0%) scale(1.36)" // Center horizontally and move up
                         : "translate(15%, 25%) scale(1.5)", // Keep original for larger screens
                     transition: { duration: 1.2, ease: "easeInOut" },
                   }}
@@ -797,87 +809,111 @@ art3mis.xyz
                   <motion.div
                     className="absolute w-full rounded-[1.25rem] z-20"
                     style={{
-                      width: "clamp(93px, calc(186 / 1920 * 100vw), 186px)",
-                      aspectRatio: "93/139",
+                      width: "clamp(92px, calc(186 / 1920 * 100vw), 185px)",
+                      aspectRatio: "92/138",
                       boxShadow: "0 0 16px #FFB800",
                     }}
                   />
                 </motion.div>
               )}
-
+              {/* result desktop */}
               {showFinalContent && (
-                <div className="absolute w-full top-[40%] md:justify-center  md:top-[44%] md:mr-52 content-center items-center flex flex-col font-bold text-white  ">
-                  <div className="flex flex-row w-full h-[270px] md:w-[65%] pr-2 md:h-full ">
+                <div className="absolute hidden md:flex flex-col gap-3 left-[calc(456/1920*100%)] top-[calc(463/1080*100%)]">
+                  <div
+                    className="absolute z-30 top-24 md:top-36 left-[calc(-280/860*100%)] md:left-[calc(-412/1920*100%)] w-[100px] h-[135px] md:h-[280px] md:w-[220px]"
+                    style={{
+                      // width: "clamp(135px, calc(270 / 1920 * 100vw), 270px)",
+                      aspectRatio: "135/179",
+                      // top: `calc(380 / 1080 * 100%)`,
+                      // left: `calc(-412 / 1920 * 100%)`,
+                    }}
+                  >
+                    <Image
+                      src="/images/ask_cat2.webp"
+                      alt="Ask"
+                      width={135}
+                      height={179}
+                      sizes="135px"
+                      className="w-full h-full"
+                      priority
+                    />
+                  </div>
+                  {/* result desktop */}
+                  <div
+                    className="hidden md:block relative z-20 overflow-hidden aspect-[895/456]"
+                    style={{
+                      width: "clamp(447.5px, calc(895 / 1920 * 100vw), 895px)",
+                    }}
+                  >
+                    <Image
+                      src="/images/content_border.webp"
+                      alt="Content"
+                      width={895}
+                      height={456}
+                      sizes="895px"
+                      className="w-full h-full"
+                      priority
+                    />
                     <div
-                      className=" relative md:top-36 md:left-16 w-[100px]  h-[135px] md:h-[280px] md:w-[220px] z-30 "
                       style={{
-                        // width: "clamp(135px, calc(270 / 1920 * 100vw), 270px)",
-                        aspectRatio: "135/179",
-                        // top: `calc(380 / 1080 * 100%)`,
-                        // left: `calc(-412 / 1920 * 100%)`,
+                        top: "calc(56 /1080 * 100vh)",
+                        left: "calc(77 / 1920 * 100vw)",
+                        width: "calc(762 / 1920 * 100vw)",
+                        resize: "none",
                       }}
+                      className="absolute text-[#67cbfa] text-[1.2rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold"
                     >
-                      <Image
-                        src="/images/ask_cat2.webp"
-                        alt="Ask"
-                        width={135}
-                        height={179}
-                        sizes="135px"
-                        className="w-full h-full"
-                        priority
-                      />
-                    </div>
-                    <div
-                      className="relative z-20 w-full md:w-[700px] h-[350px]  overflow-hidden  "
-                      style={{
-                        aspectRatio: "895/456",
-                      }}
-                    >
-                      <div className="hidden md:block absolute w-full h-full">
-                        {" "}
-                        <Image
-                          src="/images/content_border.webp"
-                          alt="Content"
-                          width={895}
-                          height={456}
-                          sizes="895px"
-                          className="w-full h-full"
-                          objectFit="cover"
-                          priority
-                        />
-                      </div>
                       <div
-                        className="py-2 w-full h-auto px-3 border bg-opacity-20 bg-black backdrop-blur-sm 
-                                    border-[#67cbfa] shadow-[0_2px_8px_1px_#67cbfa] rounded-md text-[#67cbfa] 
-                                    text-xs font-bold md:hidden overflow-auto "
+                        className="overflow-auto"
+                        style={{
+                          height:
+                            "clamp(182px, calc(356 / 1080 * 100vh), 356px)",
+                        }}
                       >
                         {choseContent}
                       </div>
+                    </div>
+                  </div>
+                  {/* result mobile */}
+                  <div
+                    className="md:hidden relative z-20 overflow-hidden aspect-[567/620]"
+                    style={{
+                      width: "clamp(260px, calc(260 / 860 * 100vw), 567px)",
+                    }}
+                  >
+                    <Image
+                      src="/images/content_border_mobile.png"
+                      alt="Content"
+                      width={567}
+                      height={670}
+                      sizes="567px"
+                      className="w-full h-full"
+                      priority
+                    />
+                    <div
+                      style={{
+                        top: "calc(24 /932 * 100%)",
+                        left: "calc(24 / 430 * 100vw)",
+                        resize: "none",
+                      }}
+                      className="absolute text-[#67cbfa] text-[0.75rem] sm:text-[0.75rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold"
+                    >
                       <div
+                        className="overflow-auto"
                         style={{
-                          top: "calc(56 /1080 * 100vh)",
-                          left: "calc(77 / 1920 * 100vw)",
-                          width: "calc(762 / 1920 * 100vw)",
-                          resize: "none",
+                          width: "clamp(141px, calc(220 / 430 * 100vw), 220px)",
+                          height:
+                            "clamp(180px, calc(320 / 932 * 100vh), 320px)",
                         }}
-                        className=" hidden md:block absolute text-[#67cbfa] text-[1.2rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold"
                       >
-                        <div
-                          className="overflow-auto"
-                          style={{
-                            height:
-                              "clamp(182px, calc(356 / 1080 * 100vh), 356px)",
-                          }}
-                        >
-                          {choseContent}
-                        </div>
+                        {choseContent}
                       </div>
                     </div>
-                  </div>{" "}
-                  <div className="relative md:left-16 flex justify-end flex-row md:flex  gap-3 z-20">
+                  </div>
+                  <div className="relative flex justify-center gap-3 z-20">
                     <div
                       onClick={handleRestartClick}
-                      className="relative cursor-pointer transition-all duration-300 hover:brightness-125"
+                      className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
                       style={{
                         width:
                           "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
@@ -896,7 +932,7 @@ art3mis.xyz
                     </div>
                     <div
                       onClick={handleMintClick}
-                      className="relative cursor-pointer transition-all duration-300 hover:brightness-125"
+                      className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
                       style={{
                         width:
                           "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
@@ -915,7 +951,7 @@ art3mis.xyz
                     </div>
                     <div
                       onClick={handleShareClick}
-                      className="relative cursor-pointer transition-all duration-300 hover:brightness-125"
+                      className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
                       style={{
                         width:
                           "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
@@ -931,6 +967,130 @@ art3mis.xyz
                         className="w-full h-full"
                         priority
                       />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* result mobile */}
+              {showFinalContent && (
+                <div className="relative top-32 md:hidden gap-3">
+                  <div className="flex flex-col">
+                    <div className="flex items-center">
+                      <div
+                        className="z-30 w-[100px] h-[135px]"
+                        style={{
+                          // width: "clamp(135px, calc(270 / 1920 * 100vw), 270px)",
+                          aspectRatio: "135/179",
+                          // top: `calc(380 / 1080 * 100%)`,
+                          // left: `calc(-412 / 1920 * 100%)`,
+                        }}
+                      >
+                        <Image
+                          src="/images/ask_cat2.webp"
+                          alt="Ask"
+                          width={135}
+                          height={179}
+                          sizes="135px"
+                          className="w-full h-full"
+                          priority
+                        />
+                      </div>
+                      <div
+                        className="md:hidden relative z-20 overflow-hidden aspect-[567/620]"
+                        style={{
+                          width: "clamp(273px, calc(283 / 860 * 100vw), 567px)",
+                        }}
+                      >
+                        <Image
+                          src="/images/content_border_mobile.png"
+                          alt="Content"
+                          width={567}
+                          height={670}
+                          sizes="567px"
+                          className="w-full h-full"
+                          priority
+                        />
+                        <div
+                          style={{
+                            top: "calc(24 /932 * 100%)",
+                            left: "calc(24 / 430 * 100vw)",
+                            resize: "none",
+                          }}
+                          className="absolute text-[#67cbfa] text-[0.75rem] sm:text-[0.75rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold"
+                        >
+                          <div
+                            className="overflow-auto"
+                            style={{
+                              width:
+                                "clamp(141px, calc(250 / 430 * 100vw), 250px)",
+                              height:
+                                "clamp(180px, calc(320 / 932 * 100vh), 320px)",
+                            }}
+                          >
+                            {choseContent}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative top-2 flex justify-center gap-3 z-20">
+                      <div
+                        onClick={handleRestartClick}
+                        className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
+                        style={{
+                          width:
+                            "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
+                          aspectRatio: "239/80",
+                        }}
+                      >
+                        <Image
+                          src="/images/restart_btn.webp"
+                          alt="Restart"
+                          width={110}
+                          height={30}
+                          sizes="110px"
+                          className="w-full h-full"
+                          priority
+                        />
+                      </div>
+                      <div
+                        onClick={handleMintClick}
+                        className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
+                        style={{
+                          width:
+                            "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
+                          aspectRatio: "239/80",
+                        }}
+                      >
+                        <Image
+                          src="/images/mint_btn.webp"
+                          alt="Mint"
+                          width={110}
+                          height={30}
+                          sizes="110px"
+                          className="w-full h-full"
+                          priority
+                        />
+                      </div>
+                      <div
+                        onClick={handleShareClick}
+                        className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
+                        style={{
+                          width:
+                            "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
+                          aspectRatio: "239/80",
+                        }}
+                      >
+                        <Image
+                          src="/images/share_btn.webp"
+                          alt="Mint"
+                          width={110}
+                          height={30}
+                          sizes="110px"
+                          className="w-full h-full"
+                          priority
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
