@@ -13,6 +13,8 @@ import { mintCard, MintCardArguments } from "@/entry-functions/mintCard";
 import { aptosClient } from "@/utils/aptosClient";
 import dynamic from "next/dynamic";
 import { MODULE_ADDRESS } from "@/constants";
+import { convertUrl } from "@/utils/helpers";
+import { useRouter } from "next/navigation";
 const FireLeft = dynamic(() => import("@/components/FireLeft"), {
   ssr: false,
 });
@@ -23,7 +25,7 @@ const FireRight = dynamic(() => import("@/components/FireRight"), {
 function App() {
   const { connected, signAndSubmitTransaction } = useWallet();
   const { toast } = useToast();
-
+  const router = useRouter();
   // const [innerWidth, setInnerWidth] = useState(0);
   // const [innerHeight, setInnerHeight] = useState(0);
   const [bgLoading, setBgLoading] = useState(true);
@@ -158,17 +160,6 @@ function App() {
       }
     }
   };
-
-  function convertUrl(url: string) {
-    if (url.startsWith("ipfs://")) {
-      const withoutPrefix = url.replace("ipfs://", "");
-      const pathParts = withoutPrefix.split("/");
-      return `/cards/${pathParts[1]}`;
-    } else {
-      url = `/images/card.webp`;
-    }
-    return url;
-  }
 
   const handleCardClick = (index: number, event: React.MouseEvent) => {
     if (clickedIndex !== null) return;
@@ -336,7 +327,7 @@ art3mis.xyz
                     <div className="w-full max-w-[300px] md:hidden md:max-w-[846px] px-3">
                       <div
                         className="font-irishGrover py-2 w-full border bg-opacity-0 bg-black backdrop-blur-sm 
-                                    border-[#C77F7F]  md:whitespace-nowrap text-wrap  rounded-md text-[#f5be66] text-[1rem] whitespace-nowrap blur-[0.6px] px-4 shadow-[0_0_8px_#f5be66]"
+                                    border-[#C77F7F]  md:whitespace-nowrap text-wrap  rounded-md text-[#f5be66] text-[1rem] blur-[0.6px] px-4 shadow-[0_0_8px_#f5be66]"
                       >
                         Welcome, seeker of truth. The cards await your fate.
                         Shall we begin?
@@ -1011,7 +1002,7 @@ art3mis.xyz
                   <div className="flex items-center justify-center">
                     <div className="relative z-20 w-full max-w-[350px] md:hidden">
                       <div
-                        className="py-5 w-full border bg-[#ebe5c9]
+                        className="font-sans py-5 w-full border bg-[#ebe5c9]
                                       border-[#c77f7f]  md:whitespace-nowrap text-wrap  rounded-md text-[#C77F7F] text-[0.86rem] whitespace-nowrap px-3 shadow-[0_0_8px_#f5be66]"
                       >
                         {choseContent}
@@ -1077,10 +1068,7 @@ art3mis.xyz
                 onClick={() => {
                   page.label === "Home"
                     ? setCurrentPage(page.label)
-                    : toast({
-                        description: "Coming Soon~",
-                        className: "bg-[#573019] text-white",
-                      });
+                    : router.push("/profile");
                 }}
                 className={`px-3 md:px-5 py-1 flex flex-col justify-center bg-[#0F0E26] text-center 
                                items-center w-1/2 ${

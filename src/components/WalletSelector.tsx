@@ -43,8 +43,12 @@ import {
 } from "lucide-react";
 import { useCallback, useState, useEffect } from "react";
 import { getAccountAPTBalance } from "@/view-functions/getAccountBalance";
+// import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 
 export function WalletSelector() {
+  const router = useRouter();
+  const pathname = usePathname();
   const { account, connected, disconnect } = useWallet();
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -90,10 +94,11 @@ export function WalletSelector() {
   }, [account?.address]);
 
   const handleProfile = () => {
-    toast({
-      description: "Coming Soon~",
-      className: "bg-[#573019] text-white",
-    });
+    router.push("/profile");
+  };
+
+  const handleHome = () => {
+    router.push("/");
   };
 
   return connected ? (
@@ -221,7 +226,9 @@ export function WalletSelector() {
           width: "clamp(106px, calc(212 / 1920 * 100vw), 212px)",
           aspectRatio: "212/80",
         }}
-        onClick={handleProfile}
+        onClick={
+          pathname === "/profile" ? () => handleHome() : () => handleProfile()
+        }
       >
         <Image
           src="/images/wallet_bg.webp"
@@ -233,7 +240,7 @@ export function WalletSelector() {
           priority
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#EC9261] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap">
-          Profile
+          {pathname === "/profile" ? "Home" : "Profile"}
         </div>
       </div>
     </div>

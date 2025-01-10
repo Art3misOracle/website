@@ -9,3 +9,14 @@ export const isValidNetworkName = (network: NetworkInfo | null) => {
   // we resolve it as a valid network name
   return true;
 };
+
+export const convertUrl = (url: string) => {
+  if (url.startsWith("ipfs://")) {
+    const withoutPrefix = url.replace("ipfs://", "");
+    const pathParts = withoutPrefix.split("/");
+    return `/cards/${pathParts[1]}`;
+  } else {
+    url = `/images/card.webp`;
+  }
+  return url;
+};
