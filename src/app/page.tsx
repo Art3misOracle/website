@@ -349,35 +349,14 @@ art3mis.xyz
                     {/* mobile  */}
 
                     <div
-                      className="relative hidden md:block"
+                      className="relative hidden md:flex text-[#f5be66] text-[0.68rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.1rem] font-bold [text-shadow:1px_1px_5px_black] blur-[0.4px] md:blur-[0.8px] px-4 py-2 rounded-2xl border border-[#C77F7F] shadow-[0_0_8px_#f5be66] items-center justify-center"
                       style={{
                         width: "clamp(180px, calc(846 / 1920 * 100vw), 846px)",
                         aspectRatio: "423/44",
                       }}
                     >
-                      {/* <Image
-                        src="/images/ask_box_mobile.png"
-                        alt="Ask"
-                        width={423}
-                        height={44}
-                        sizes="423px"
-                        className="w-full h-full md:hidden"
-                        priority
-                      /> */}
-
-                      <Image
-                        src="/images/ask_box.webp"
-                        alt="Ask"
-                        width={423}
-                        height={44}
-                        sizes="423px"
-                        className="w-full h-full hidden md:block"
-                        priority
-                      />
-                      <div className="absolute top-1/2 md:left-1/2 md:-translate-x-1/2 -translate-y-1/2 text-[#f5be66] text-[0.68rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.1rem] font-bold [text-shadow:1px_1px_5px_black] md:whitespace-nowrap blur-[0.4px] md:blur-[0.6px] px-4 py-2 rounded">
-                        Welcome, seeker of truth. The cards await your fate.
-                        Shall we begin?
-                      </div>
+                      Welcome, seeker of truth. The cards await your fate. Shall
+                      we begin?
                     </div>
 
                     {/* Ready button - Responsive sizing */}
