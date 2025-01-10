@@ -262,6 +262,18 @@ art3mis.xyz
     window.open(twitterShareUrl, "_blank", "noopener,noreferrer");
   };
 
+  const goProfile = () => {
+    if (!connected) {
+      toast({
+        title: "Warning",
+        description: "Please enter your question first~",
+      });
+      return;
+    } else {
+      router.push("/profile");
+    }
+  };
+
   return (
     <div className="w-full h-screen bg-black flex flex-col items-center justify-center">
       {bgLoading ? (
@@ -1003,7 +1015,7 @@ art3mis.xyz
                     <div className="relative z-20 w-full max-w-[350px] md:hidden">
                       <div
                         className="font-sans py-5 w-full border bg-[#ebe5c9]
-                                      border-[#c77f7f]  md:whitespace-nowrap text-wrap  rounded-md text-[#C77F7F] text-[0.86rem] whitespace-nowrap px-3 shadow-[0_0_8px_#f5be66]"
+                                      border-[#c77f7f]  md:whitespace-nowrap text-wrap  rounded-md text-[#C77F7F] text-[0.86rem] px-3 shadow-[0_0_8px_#f5be66]"
                       >
                         {choseContent}
                       </div>
@@ -1068,7 +1080,7 @@ art3mis.xyz
                 onClick={() => {
                   page.label === "Home"
                     ? setCurrentPage(page.label)
-                    : router.push("/profile");
+                    : goProfile();
                 }}
                 className={`px-3 md:px-5 py-1 flex flex-col justify-center bg-[#0F0E26] text-center 
                                items-center w-1/2 ${
