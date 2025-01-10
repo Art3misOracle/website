@@ -8,13 +8,11 @@ const FireLeft = () => {
     <>
       {/* mobile */}
 
-      <div className="hidden">
+      <div className="md:hidden">
         <div
-          className=" absolute"
+          className="absolute left-[12vw] bottom-[54vh] 375s:left-[12vw] 375s:bottom-[54vh] 390s:left-[10.5vw] 390s:bottom-[53vh] 412s:left-[9.6vw] 412s:bottom-[53.2vh] 414s:left-[10.5vw] 414s:bottom-[53vh]"
           style={{
-            left: "calc(496 / 1920 * 100%)",
-            bottom: "calc(551 / 1080 * 100%)",
-            width: "clamp(40px, 6%, 280px)",
+            width: "clamp(36px, 6%, 280px)",
             aspectRatio: "138/216",
             transform: "translate(-50%, 50%)",
           }}
@@ -22,7 +20,7 @@ const FireLeft = () => {
           <Lottie animationData={fireAnimation} loop={true} autoplay={true} />
         </div>
 
-        <div
+        {/* <div
           className=" absolute"
           style={{
             left: "calc(530 / 1920 * 100%)",
@@ -33,7 +31,7 @@ const FireLeft = () => {
           }}
         >
           <Lottie animationData={fireAnimation} loop={true} autoplay={true} />
-        </div>
+        </div> */}
       </div>
 
       {/* desktop */}

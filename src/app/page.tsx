@@ -184,6 +184,9 @@ function App() {
     console.log("rect", rect.left + rect.width / 2);
     console.log("rect", rect.top + rect.height / 2);
     setClickedIndex(index);
+    // update: show card instantly
+    setClickedCard(false);
+    setChoseCardVisible(true);
   };
 
   const handleChoseCardClick = () => {
@@ -269,32 +272,32 @@ art3mis.xyz
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-3.5rem)] md:h-screen bg-black flex flex-col items-center justify-center">
+    <div className="w-full h-screen bg-black flex flex-col items-center justify-center">
       {bgLoading ? (
-        <div className="w-full min-h-[calc(100vh-3.5rem)] md:h-screen bg-black animate-pulse">
+        <div className="w-full h-screen bg-black animate-pulse">
           <Loading />
         </div>
       ) : (
-        <div className="relative w-full min-h-[calc(100vh-3.5rem)] md:h-screen flex flex-col">
+        <div className="relative w-full h-screen flex flex-col">
           {loading && <Loading />}
           {(showTable || showCardList) && (
             <div className="fixed inset-0 bg-black opacity-60 z-10" />
           )}
-          <div className="relative w-full min-h-[calc(100vh-3.5rem)] md:h-screen flex flex-col">
+          <div className="relative w-full h-screen flex flex-col">
             {/* Background Image */}
 
             <Image
               src="/images/bg_mobile.png"
               alt="background"
               fill
-              className="md:hidden absolute top-0 left-0 w-full h-full object-fill"
+              className="md:hidden absolute top-0 left-0 w-full h-full object-cover"
             />
 
             <Image
               src="/images/bg.webp"
               alt="background"
               fill
-              className="hidden md:block absolute top-0 left-0 w-full h-full object-cover md:object-fill "
+              className="hidden md:block absolute top-0 left-0 w-full h-full md:object-fill "
             />
             {/* fire animation */}
 
@@ -316,40 +319,40 @@ art3mis.xyz
 
             {/* ask */}
 
-            <div className="flex flex-1 flex-col items-center justify-center gap-6 px-4">
+            <div className="flex flex-col items-center justify-center gap-6 px-2">
               {!showTips && !showTable && !showCardList && (
                 <div
                   className="absolute flex md:flex-row justify-center items-center z-10 w-full md:w-auto 
-                               md:left-[20%] top-[85%] md:top-[80%] transform -translate-y-1/2 "
+                               md:left-[20%] top-[30%] md:top-[80%] transform -translate-y-1/2 "
                 >
                   {/* AskCat container - Responsive sizing */}
-                  <div className="w-[120px] md:w-[140px] lg:w-[220px] aspect-[120/160]">
+                  <div className="w-[120px] hidden md:block md:w-[140px] lg:w-[220px] aspect-[120/160]">
                     <AskCat />
                   </div>
 
                   {/* Text and button container */}
                   <div className="flex flex-col gap-4 justify-center items-center mt-4 md:mt-0">
                     {/* Text box - Responsive width and font size */}
-                    {/* <div className="w-full max-w-[300px] md:hidden md:max-w-[846px] px-3">
+                    <div className="w-full max-w-[300px] md:hidden md:max-w-[846px] px-3">
                       <div
-                        className="font-irishGrover py-2 w-full border bg-opacity-20 bg-black backdrop-blur-sm 
-                                    border-[#C77F7F] shadow-[0_2px_8px_1px_#C77F7F] md:whitespace-nowrap text-wrap  rounded-md text-[#f5be66] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.1rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap blur-[0.6px] px-4 "
+                        className="font-irishGrover py-2 w-full border bg-opacity-0 bg-black backdrop-blur-sm 
+                                    border-[#C77F7F]  md:whitespace-nowrap text-wrap  rounded-md text-[#f5be66] text-[1rem] whitespace-nowrap blur-[0.6px] px-4 shadow-[0_0_8px_#f5be66]"
                       >
                         Welcome, seeker of truth. The cards await your fate.
                         Shall we begin?
                       </div>
-                    </div> */}
+                    </div>
 
                     {/* mobile  */}
 
                     <div
-                      className="relative"
+                      className="relative hidden md:block"
                       style={{
                         width: "clamp(180px, calc(846 / 1920 * 100vw), 846px)",
                         aspectRatio: "423/44",
                       }}
                     >
-                      <Image
+                      {/* <Image
                         src="/images/ask_box_mobile.png"
                         alt="Ask"
                         width={423}
@@ -357,7 +360,7 @@ art3mis.xyz
                         sizes="423px"
                         className="w-full h-full md:hidden"
                         priority
-                      />
+                      /> */}
 
                       <Image
                         src="/images/ask_box.webp"
@@ -377,7 +380,7 @@ art3mis.xyz
                     {/* Ready button - Responsive sizing */}
                     <div
                       onClick={handleReadyClick}
-                      className="w-[90px] md:w-[220px] aspect-[110/30] cursor-pointer 
+                      className="w-[150px] md:w-[220px] aspect-[150/50] md:aspect-[110/30] cursor-pointer 
                                   transition-all duration-300 hover:brightness-125"
                     >
                       <Image
@@ -385,7 +388,7 @@ art3mis.xyz
                         alt="Ready"
                         width={110}
                         height={30}
-                        sizes="(max-width: 768px) 90px, 220px"
+                        sizes="(max-width: 768px) 120px, 220px"
                         className="w-full h-full"
                         priority
                       />
@@ -396,7 +399,7 @@ art3mis.xyz
               {showTips && (
                 <div
                   className="absolute md:mt-0 flex flex-row justify-center items-center w-full md:w-auto 
-                            md:left-[25%] top-[85%] md:top-[80%] transform -translate-y-1/2 p-2 z-10"
+                            md:left-[25%] top-[80%] transform -translate-y-1/2 p-2 z-10"
                 >
                   <div
                     className="relative"
@@ -469,10 +472,21 @@ art3mis.xyz
                   <div
                     className="relative w-full max-w-[490px] p-4 bg-[url('/images/ask_table.webp')] bg-no-repeat bg-center bg-cover rounded-md"
                     style={{
-                      // width: "clamp(490px, calc(980 / 1920 * 100vw), 980px)",
                       aspectRatio: "490/423",
                     }}
                   >
+                    <button
+                      className="absolute top-[-5%] right-0 m-4"
+                      onClick={() => initStatus()}
+                    >
+                      <Image
+                        src="/images/close.png"
+                        alt="Close"
+                        width={42}
+                        height={42}
+                        // className="w-6 h-6"
+                      />
+                    </button>
                     {/* <Image
                       src="/images/ask_table.webp"
                       alt="Ask"
@@ -532,7 +546,7 @@ art3mis.xyz
                           className="relative w-full ml-3 cursor-pointer transition-all duration-300 hover:brightness-125"
                           style={{
                             width:
-                              "clamp(126.5px, calc(253 / 1920 * 100vw), 253px)",
+                              "clamp(150px, calc(253 / 1920 * 100vw), 253px)",
                             aspectRatio: "253/86",
                           }}
                           onClick={handleRevealClick}
@@ -552,93 +566,7 @@ art3mis.xyz
                   </div>
                 </motion.div>
               )}
-              {showCardList && (
-                <div className="absolute flex-wrap md:top-1/2 flex justify-center gap-8 z-10">
-                  {Array.from({ length: 6 }).map((_, index) => (
-                    <AnimatePresence key={index}>
-                      {clickedIndex === null ? (
-                        <motion.div
-                          key={index}
-                          className="relative w-full cursor-pointer"
-                          style={{
-                            width:
-                              "clamp(93px, calc(186 / 1920 * 100vw), 186px)",
-                            aspectRatio: "93/139",
-                          }}
-                          onClick={(e) => handleCardClick(index, e)}
-                          whileHover={{ translateY: "-32px" }}
-                          transition={{ duration: 0.5 }}
-                          initial={{ opacity: 1 }}
-                          animate={
-                            clickedIndex === null
-                              ? { opacity: 1, y: 0 }
-                              : clickedIndex === index
-                                ? { opacity: 0 }
-                                : {
-                                    y: 100,
-                                    opacity: 0,
-                                    transition: { duration: 1 },
-                                  }
-                          }
-                          exit={{
-                            y: "100vh",
-                            opacity: 0,
-                            transition: { duration: 1.5 },
-                          }}
-                        >
-                          <div
-                            className="absolute w-full"
-                            style={{
-                              width:
-                                "clamp(93px, calc(186 / 1920 * 100vw), 186px)",
-                              aspectRatio: "93/139",
-                            }}
-                          >
-                            <Image
-                              src="/images/card.webp"
-                              alt="Card"
-                              width={93}
-                              height={139}
-                              sizes="93px"
-                              className="w-full h-full"
-                              priority
-                            />
-                          </div>
-                          <motion.div
-                            className="absolute w-full rounded-2xl"
-                            style={{
-                              width:
-                                "clamp(94px, calc(187 / 1920 * 100vw), 187px)",
-                              aspectRatio: "93/139",
-                            }}
-                            whileHover={{
-                              boxShadow: [
-                                "0 0 16px #FFB800",
-                                "0 0 3px #FFB800",
-                              ],
-                              transition: {
-                                duration: 1,
-                                ease: "easeInOut",
-                                repeat: Infinity,
-                                repeatType: "reverse",
-                              },
-                            }}
-                            initial={{ boxShadow: "none" }}
-                            animate={{
-                              boxShadow: "none",
-                              transition: { duration: 0.3 },
-                            }}
-                            exit={{
-                              boxShadow: "none",
-                              transition: { duration: 0.3 },
-                            }}
-                          ></motion.div>
-                        </motion.div>
-                      ) : null}
-                    </AnimatePresence>
-                  ))}
-                </div>
-              )}
+
               {/* the chose card */}
               {clickedIndex !== null && clickedCard && (
                 <AnimatePresence>
@@ -776,14 +704,17 @@ art3mis.xyz
                   }}
                   animate={{
                     opacity: 1,
-                    left: `calc(1375.5 / 1920 * 100%)`,
+                    left:
+                      window.innerWidth < 768
+                        ? `50%`
+                        : `calc(1375.5 / 1920 * 100%)`,
                     top:
                       window.innerWidth < 768
-                        ? `16%`
+                        ? `20%`
                         : `calc(482.5 / 1080 * 100%)`, // Mobile logic
                     transform:
                       window.innerWidth < 768
-                        ? "translate(-135%, 0%) scale(1.36)" // Center horizontally and move up
+                        ? "translate(-50%, -50%) scale(1.36)" // Center horizontally and move up
                         : "translate(15%, 25%) scale(1.5)", // Keep original for larger screens
                     transition: { duration: 1.2, ease: "easeInOut" },
                   }}
@@ -971,135 +902,172 @@ art3mis.xyz
                   </div>
                 </div>
               )}
-              {/* result mobile */}
-              {showFinalContent && (
-                <div className="relative top-32 md:hidden gap-3">
-                  <div className="flex flex-col">
-                    <div className="flex items-center">
-                      <div
-                        className="z-30 w-[100px] h-[135px]"
+            </div>
+            {showCardList && (
+              <div className="absolute flex-wrap md:flex-nowrap md:left-1/2 md:translate-x-[-50%] top-1/2 md:top-[66%] translate-y-[-50%] flex justify-center gap-8 z-10">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <AnimatePresence key={index}>
+                    {clickedIndex === null ? (
+                      <motion.div
+                        key={index}
+                        className="relative w-full cursor-pointer"
                         style={{
-                          // width: "clamp(135px, calc(270 / 1920 * 100vw), 270px)",
-                          aspectRatio: "135/179",
-                          // top: `calc(380 / 1080 * 100%)`,
-                          // left: `calc(-412 / 1920 * 100%)`,
+                          width: "clamp(93px, calc(186 / 1920 * 100vw), 186px)",
+                          aspectRatio: "93/139",
+                        }}
+                        onClick={(e) => handleCardClick(index, e)}
+                        whileHover={{ translateY: "-32px" }}
+                        transition={{ duration: 0.5 }}
+                        initial={{ opacity: 1 }}
+                        animate={
+                          clickedIndex === null
+                            ? { opacity: 1, y: 0 }
+                            : clickedIndex === index
+                              ? { opacity: 0 }
+                              : {
+                                  y: 100,
+                                  opacity: 0,
+                                  transition: { duration: 1 },
+                                }
+                        }
+                        exit={{
+                          y: "100vh",
+                          opacity: 0,
+                          transition: { duration: 1.5 },
                         }}
                       >
-                        <Image
-                          src="/images/ask_cat2.webp"
-                          alt="Ask"
-                          width={135}
-                          height={179}
-                          sizes="135px"
-                          className="w-full h-full"
-                          priority
-                        />
-                      </div>
-                      <div
-                        className="md:hidden relative z-20 overflow-hidden aspect-[567/620]"
-                        style={{
-                          width: "clamp(273px, calc(283 / 860 * 100vw), 567px)",
-                        }}
-                      >
-                        <Image
-                          src="/images/content_border_mobile.png"
-                          alt="Content"
-                          width={567}
-                          height={670}
-                          sizes="567px"
-                          className="w-full h-full"
-                          priority
-                        />
                         <div
+                          className="absolute w-full"
                           style={{
-                            top: "calc(24 /932 * 100%)",
-                            left: "calc(24 / 430 * 100vw)",
-                            resize: "none",
+                            width:
+                              "clamp(93px, calc(186 / 1920 * 100vw), 186px)",
+                            aspectRatio: "93/139",
                           }}
-                          className="absolute text-[#67cbfa] text-[0.75rem] sm:text-[0.75rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold"
                         >
-                          <div
-                            className="overflow-auto"
-                            style={{
-                              width:
-                                "clamp(141px, calc(250 / 430 * 100vw), 250px)",
-                              height:
-                                "clamp(180px, calc(320 / 932 * 100vh), 320px)",
-                            }}
-                          >
-                            {choseContent}
-                          </div>
+                          <Image
+                            src="/images/card.webp"
+                            alt="Card"
+                            width={93}
+                            height={139}
+                            sizes="93px"
+                            className="w-full h-full"
+                            priority
+                          />
                         </div>
-                      </div>
-                    </div>
-
-                    <div className="relative top-2 flex justify-center gap-3 z-20">
+                        <motion.div
+                          className="absolute w-full rounded-2xl"
+                          style={{
+                            width:
+                              "clamp(94px, calc(187 / 1920 * 100vw), 187px)",
+                            aspectRatio: "93/139",
+                          }}
+                          whileHover={{
+                            boxShadow: ["0 0 16px #FFB800", "0 0 3px #FFB800"],
+                            transition: {
+                              duration: 1,
+                              ease: "easeInOut",
+                              repeat: Infinity,
+                              repeatType: "reverse",
+                            },
+                          }}
+                          initial={{ boxShadow: "none" }}
+                          animate={{
+                            boxShadow: "none",
+                            transition: { duration: 0.3 },
+                          }}
+                          exit={{
+                            boxShadow: "none",
+                            transition: { duration: 0.3 },
+                          }}
+                        ></motion.div>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                ))}
+              </div>
+            )}
+            {/* result mobile */}
+            {showFinalContent && (
+              <div className="relative top-[36%] md:hidden gap-2 z-20">
+                <div className="flex flex-col items-center">
+                  <div
+                    onClick={handleMintClick}
+                    className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125 mb-4"
+                    style={{
+                      width: "clamp(80px, calc(160 / 430 * 100vw), 160px)",
+                      aspectRatio: "160/50",
+                    }}
+                  >
+                    <Image
+                      src="/images/mint_mobile.png"
+                      alt="Mint"
+                      width={160}
+                      height={50}
+                      sizes="160px"
+                      className="w-full h-full"
+                      priority
+                    />
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="relative z-20 w-full max-w-[350px] md:hidden">
                       <div
-                        onClick={handleRestartClick}
-                        className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
-                        style={{
-                          width:
-                            "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
-                          aspectRatio: "239/80",
-                        }}
+                        className="py-5 w-full border bg-[#ebe5c9]
+                                      border-[#c77f7f]  md:whitespace-nowrap text-wrap  rounded-md text-[#C77F7F] text-[0.86rem] whitespace-nowrap px-3 shadow-[0_0_8px_#f5be66]"
                       >
-                        <Image
-                          src="/images/restart_btn.webp"
-                          alt="Restart"
-                          width={110}
-                          height={30}
-                          sizes="110px"
-                          className="w-full h-full"
-                          priority
-                        />
-                      </div>
-                      <div
-                        onClick={handleMintClick}
-                        className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
-                        style={{
-                          width:
-                            "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
-                          aspectRatio: "239/80",
-                        }}
-                      >
-                        <Image
-                          src="/images/mint_btn.webp"
-                          alt="Mint"
-                          width={110}
-                          height={30}
-                          sizes="110px"
-                          className="w-full h-full"
-                          priority
-                        />
-                      </div>
-                      <div
-                        onClick={handleShareClick}
-                        className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
-                        style={{
-                          width:
-                            "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
-                          aspectRatio: "239/80",
-                        }}
-                      >
-                        <Image
-                          src="/images/share_btn.webp"
-                          alt="Mint"
-                          width={110}
-                          height={30}
-                          sizes="110px"
-                          className="w-full h-full"
-                          priority
-                        />
+                        {choseContent}
                       </div>
                     </div>
                   </div>
+
+                  <div className="relative top-5 flex justify-center gap-5 z-20">
+                    <div
+                      onClick={handleRestartClick}
+                      className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
+                      style={{
+                        width:
+                          "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
+                        aspectRatio: "239/80",
+                      }}
+                    >
+                      <Image
+                        src="/images/start_again_mobile.png"
+                        alt="Restart"
+                        width={110}
+                        height={30}
+                        sizes="110px"
+                        className="w-full h-full"
+                        priority
+                      />
+                    </div>
+
+                    <div
+                      onClick={handleShareClick}
+                      className="relative w-full cursor-pointer transition-all duration-300 hover:brightness-125"
+                      style={{
+                        width:
+                          "clamp(119.5px, calc(239 / 1920 * 100vw), 239px)",
+                        aspectRatio: "239/80",
+                      }}
+                    >
+                      <Image
+                        src="/images/share_mobile.png"
+                        alt="Mint"
+                        width={110}
+                        height={30}
+                        sizes="110px"
+                        className="w-full h-full"
+                        priority
+                      />
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
+                <div className="h-[7rem]"></div>
+              </div>
+            )}
           </div>
 
           {/* mobile tab bar - hidden on desktop view */}
-          <div className="fixed md:hidden bottom-0 w-full flex flex-row justify-center content-center items-center ">
+          <div className="fixed md:hidden bottom-0 w-full flex flex-row justify-center content-center items-center z-20">
             {[
               { label: "Home", icon: "/icons/eye-icon.png" },
               { label: "Profile", icon: "/icons/tree-icon.png" },

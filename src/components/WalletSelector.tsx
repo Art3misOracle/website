@@ -134,7 +134,7 @@ export function WalletSelector() {
                 className="w-full h-full"
                 priority
               />
-              <div className="absolute top-1/2 left-[60%] -translate-x-[60%] -translate-y-1/2 text-[#EC9261] text-[0.6rem] sm:text-[0.6rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap flex items-center gap-2 group-data-[state=open]:text-[#8d5839]">
+              <div className="absolute top-1/2 left-[64%] -translate-x-[60%] -translate-y-1/2 text-[#EC9261] text-[0.7rem] sm:text-[0.7rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold whitespace-nowrap flex items-center gap-2 group-data-[state=open]:text-[#8d5839]">
                 Account
                 <div className="w-0 h-0 border-l-[2px] border-r-[2px] border-t-[6px] sm:border-l-[2px] sm:border-r-[2px] sm:border-t-[8px] md:border-l-[3px] md:border-r-[3px] md:border-t-[10px] lg:border-l-[4px] lg:border-r-[4px] lg:border-t-[12px] border-l-transparent border-r-transparent border-t-[#f4a07e] group-data-[state=open]:border-t-[#8d5839] bg-transparent after:content-[''] after:absolute after:top-[-1px] after:left-1/2 after:-translate-x-1/2 after:w-[3px] after:h-[1px] after:bg-transparent"></div>
               </div>
@@ -256,7 +256,7 @@ export function WalletSelector() {
             className="w-full h-full"
             priority
           />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#EC9261] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#EC9261] text-[0.68rem] sm:text-[0.68rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold whitespace-nowrap">
             Connect Wallet
           </div>
         </div>
