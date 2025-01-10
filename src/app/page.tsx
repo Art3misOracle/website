@@ -3,6 +3,13 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import {
+  Account,
+  AccountAddress,
+  AccountAuthenticator,
+  AnyRawTransaction,
+  Ed25519PrivateKey,
+} from "@aptos-labs/ts-sdk";
 import { WalletSelector } from "@/components/WalletSelector";
 import { AskCat } from "@/components/AskCat";
 import { Loading } from "@/components/Loading";
@@ -15,6 +22,8 @@ import dynamic from "next/dynamic";
 import { MODULE_ADDRESS } from "@/constants";
 import { convertUrl } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
+import { PRIVATE_KEY } from "@/constants";
+
 const FireLeft = dynamic(() => import("@/components/FireLeft"), {
   ssr: false,
 });
@@ -23,7 +32,136 @@ const FireRight = dynamic(() => import("@/components/FireRight"), {
 });
 
 function App() {
-  const { connected, signAndSubmitTransaction } = useWallet();
+  const {
+    connected,
+    account,
+    signAndSubmitTransaction,
+    signTransaction,
+    submitTransaction,
+  } = useWallet();
+  const [transactionToSubmit, setTransactionToSubmit] =
+    useState<AnyRawTransaction | null>(null);
+  // create sponsor account
+  const privateKey = new Ed25519PrivateKey(PRIVATE_KEY);
+  const sponsor = Account.fromPrivateKey({ privateKey });
+  console.log("test", sponsor.accountAddress.toString());
+
+  // Generate a raw transaction using the SDK
+  const generateTransaction = async (): Promise<AnyRawTransaction> => {
+    if (!account) {
+      throw new Error("no account");
+    }
+    const transactionToSign = await aptosClient().transaction.build.simple({
+      sender: account.address,
+      withFeePayer: true,
+      data: {
+        function: `${MODULE_ADDRESS}::tarot::draws_card`,
+        functionArguments: [],
+      },
+      options: {
+        expireTimestamp: Date.now() + 1000000000,
+        gasUnitPrice: 100,
+        maxGasAmount: 2000,
+      },
+    });
+    transactionToSign.feePayerAddress = sponsor.accountAddress;
+    return transactionToSign;
+  };
+
+  const generateMintTransaction = async (
+    args: MintCardArguments
+  ): Promise<AnyRawTransaction> => {
+    const { question, reading, card, position } = args;
+    if (!account) {
+      throw new Error("no account");
+    }
+    const transactionToSign = await aptosClient().transaction.build.simple({
+      sender: account.address,
+      withFeePayer: true,
+      data: {
+        function: `${MODULE_ADDRESS}::tarot::mint_card`,
+        functionArguments: [question, reading, card, position],
+      },
+      options: {
+        expireTimestamp: Date.now() + 1000000000,
+        gasUnitPrice: 100,
+        maxGasAmount: 2000,
+      },
+    });
+    transactionToSign.feePayerAddress = sponsor.accountAddress;
+    return transactionToSign;
+  };
+  const onSubmitTransaction = async () => {
+    const transaction = await generateTransaction();
+    const senderAuthenticator = await signTransaction(transaction);
+    const feePayerAuthenticator =
+      await aptosClient().transaction.signAsFeePayer({
+        signer: sponsor,
+        transaction,
+      });
+
+    if (!transaction) {
+      throw new Error("No Transaction to sign");
+    }
+    if (!senderAuthenticator) {
+      throw new Error("No senderAuthenticator");
+    }
+    if (!feePayerAuthenticator) {
+      throw new Error("No feepayerAuthenticator");
+    }
+    try {
+      const response = await submitTransaction({
+        transaction,
+        senderAuthenticator,
+        feePayerAuthenticator,
+      });
+      console.log("sponser1", response);
+
+      return response;
+      // toast({
+      //   title: "Success",
+      //   description: <TransactionHash hash={response.hash} network={network} />,
+      // });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onSubmitMintTransaction = async (args: MintCardArguments) => {
+    const transaction = await generateMintTransaction(args);
+    const senderAuthenticator = await signTransaction(transaction);
+    const feePayerAuthenticator =
+      await aptosClient().transaction.signAsFeePayer({
+        signer: sponsor,
+        transaction,
+      });
+
+    if (!transaction) {
+      throw new Error("No Transaction to sign");
+    }
+    if (!senderAuthenticator) {
+      throw new Error("No senderAuthenticator");
+    }
+    if (!feePayerAuthenticator) {
+      throw new Error("No feepayerAuthenticator");
+    }
+    try {
+      const response = await submitTransaction({
+        transaction,
+        senderAuthenticator,
+        feePayerAuthenticator,
+      });
+      console.log("sponser2", response);
+
+      return response;
+      // toast({
+      //   title: "Success",
+      //   description: <TransactionHash hash={response.hash} network={network} />,
+      // });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const { toast } = useToast();
   const router = useRouter();
   // const [innerWidth, setInnerWidth] = useState(0);
@@ -96,7 +234,10 @@ function App() {
     } else {
       setLoading(true);
       try {
-        const response = await signAndSubmitTransaction(drawsCard());
+        // const response = await signAndSubmitTransaction(drawsCard());
+        const response = await onSubmitTransaction();
+        console.log("sponsor", response);
+
         const res = await aptosClient().waitForTransaction({
           transactionHash: response.hash,
         });
@@ -151,6 +292,7 @@ function App() {
         // setShowCardList(true);
         // setShowTable(false);
       } catch (error) {
+        console.log("test", error);
         toast({
           title: "Error",
           description: "Network error, please try it later~",
@@ -223,6 +365,7 @@ function App() {
         position: cardPosition,
       };
       const response = await signAndSubmitTransaction(mintCard(args));
+      // const response = await onSubmitMintTransaction(args);
       const res = await aptosClient().waitForTransaction({
         transactionHash: response.hash,
       });
