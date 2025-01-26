@@ -23,7 +23,7 @@ import { MODULE_ADDRESS } from "@/constants";
 import { convertUrl } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
 import { PRIVATE_KEY } from "@/constants";
-
+import Bgmusic from "../components/bgMusic"
 const FireLeft = dynamic(() => import("@/components/FireLeft"), {
   ssr: false,
 });
@@ -42,7 +42,7 @@ function App() {
   const [transactionToSubmit, setTransactionToSubmit] =
     useState<AnyRawTransaction | null>(null);
   // create sponsor account
-  const privateKey = new Ed25519PrivateKey(PRIVATE_KEY);
+  const privateKey = new Ed25519PrivateKey('0xe1ff56f73b9ad25a6ebf4ea9cf260146aa2ab7ae2abb0f2842185fa04674ec1a');
   const sponsor = Account.fromPrivateKey({ privateKey });
   console.log("test", sponsor.accountAddress.toString());
 
@@ -452,14 +452,17 @@ art3mis.xyz
             <FireRight />
 
             {/* wallet */}
+            {/* music button */}
             <div
               className="absolute z-10"
               style={{
                 right: "calc(40 / 1920 * 100%)",
                 top: "calc(40 /1080 * 100%)",
                 height: "auto",
-              }}
+                display: "flex",
+                justifyContent: "space-between",              }}
             >
+            <Bgmusic audioSource="/softmusic.mp3"/>
               <WalletSelector />
             </div>
 
