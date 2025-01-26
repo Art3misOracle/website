@@ -37,7 +37,6 @@ const MusicButton = ({ audioSource = "/softmusic.mp3" }) => {
 
     playAudio();
 
-    // Handle visibility changes for consistent playback
     const handleVisibilityChange = () => {
       if (!document.hidden && !audio.paused) {
         // When tab becomes visible, restart playback
