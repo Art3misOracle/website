@@ -5,17 +5,17 @@ export async function POST(request: Request) {
   const { description, card, position } = await request.json();
 
   const requestBody = {
-    model: "gpt-4-turbo",
+    model: "deepseek-chat",
     messages: [
       {
         role: "user",
-        content: `You are a Major Arcana Tarot reader. Client asks this question “${description}” and draws the “${card}” card in “${position}” position. Interpret to the client in no more than 100 words.`,
+        content: `You are a Major Arcana Tarot reader. Client asks this question “${description}” and draws the “${card}” card in “${position}” position. Interpret to the client in no more than 100 words(Don't ouput the word count!)`,
       },
     ],
   };
 
   const apiKey = GPT_API_KEY;
-  const baseURL = "https://api.openai.com/v1/chat/completions";
+  const baseURL = "https://api.deepseek.com/v1/chat/completions";
   const headers = {
     "Content-Type": "application/json",
     Accept: "application/json",
