@@ -244,23 +244,23 @@ export default function App() {
               <WalletSelector />
             </div> */}
             {/* Content */}
-            <div className="relative z-10 p-6  h-full">
+            <div className="relative z-10 p-2 md:p-6 h-full">
               {/* First Row - Today's Tarot */}
               <div
-                className="mt-24 relative left-[50%] translate-x-[-50%]"
+                className="mt-6 md:mt-24 relative left-[50%] translate-x-[-50%]"
                 style={{
-                  width: "clamp(288px, calc(864 / 1920 * 100vw), 864px)",
+                  width: "clamp(200px, calc(864 / 1920 * 100vw), 864px)",
                 }}
               >
-                <div className="text-center mb-3 border-[1px] border-[#f5be66] rounded-lg pl-16 pr-4 py-2">
-                  <h1 className="text-xl font-bold text-[#f5be66] mb-1">
+                <div className="text-center mb-3 border-[1px] border-[#f5be66] rounded-lg pl-4 md:pl-16 pr-4 py-2">
+                  <h1 className="text-base md:text-xl font-bold text-[#f5be66] mb-1">
                     Today's Tarot : {todayCard.name} [{todayCard.position}]
                   </h1>
-                  <p className="text-[#f5be66] mt-1 max-w-md mx-auto text-sm">
+                  <p className="text-[#f5be66] mt-1 max-w-md mx-auto text-xs md:text-sm">
                     {todayCard.prediction}
                   </p>
                 </div>
-                <div className="w-48 h-40 absolute bottom-0 left-[-10%]">
+                <div className="hidden md:block w-24 h-20 md:w-48 md:h-40 absolute bottom-0 left-[-5%] md:left-[-10%]">
                   <Image
                     src={
                       todayCard.indicator === 1
@@ -275,9 +275,9 @@ export default function App() {
                   />
                 </div>
                 <div
-                  className="absolute bottom-0 right-[-10%]"
+                  className="hidden md:block absolute bottom-0 right-[-5%] md:right-[-10%]"
                   style={{
-                    width: "clamp(70px, calc(140 / 1920 * 100vw), 140px)",
+                    width: "clamp(35px, calc(140 / 1920 * 100vw), 140px)",
                     aspectRatio: "70/104",
                     transform: "rotate(13deg)",
                   }}
@@ -295,7 +295,7 @@ export default function App() {
               <div className="flex-1 flex flex-col justify-center">
                 {/* Second Row - Asset Predictions */}
                 <div className="p-4 mt-2">
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
                     {assetsData.map((asset, index) => (
                       <div key={index} className="flex flex-col items-center">
                         {/* Card with Asset Icon */}
