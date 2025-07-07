@@ -103,30 +103,6 @@ export function WalletSelector() {
 
   return connected ? (
     <div className="flex items-center">
-      {pathname === "ask" && (
-        <div
-          className="hidden md:block cursor-pointer md:relative mr-[-18px]"
-          style={{
-            width: "clamp(106px, calc(212 / 1920 * 100vw), 212px)",
-            aspectRatio: "212/80",
-          }}
-          onClick={() => handleHome()}
-        >
-          <Image
-            src="/images/wallet_bg.webp"
-            alt="Home"
-            width={267}
-            height={80}
-            sizes="267px"
-            className="w-full h-full"
-            priority
-          />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#EC9261] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap">
-            Home
-          </div>
-        </div>
-      )}
-
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div className="flex items-center cursor-pointer group">
@@ -267,6 +243,29 @@ export function WalletSelector() {
           {pathname === "/profile" ? "Home" : "Profile"}
         </div>
       </div>
+      {pathname === "/ask" && (
+        <div
+          className="hidden md:block cursor-pointer md:relative ml-2"
+          style={{
+            width: "clamp(106px, calc(212 / 1920 * 100vw), 212px)",
+            aspectRatio: "212/80",
+          }}
+          onClick={() => handleHome()}
+        >
+          <Image
+            src="/images/wallet_bg.webp"
+            alt="Home"
+            width={267}
+            height={80}
+            sizes="267px"
+            className="w-full h-full"
+            priority
+          />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#EC9261] text-[0.5rem] sm:text-[0.5rem] md:text-[0.75rem] lg:text-[1.2rem] font-bold [text-shadow:1px_1px_5px_black] whitespace-nowrap">
+            Home
+          </div>
+        </div>
+      )}
     </div>
   ) : (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
