@@ -155,9 +155,9 @@ export default function App() {
   // Format price display
   const formatPrice = (price: number) => {
     if (price >= 1000) {
-      return `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      return `$${price.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
     } else {
-      return `$${price.toFixed(4)}`;
+      return `$${price.toFixed(2)}`;
     }
   };
 
@@ -247,16 +247,17 @@ export default function App() {
             <div className="relative z-10 p-2 md:p-6 h-full">
               {/* First Row - Today's Tarot */}
               <div
-                className="mt-6 md:mt-24 relative left-[50%] translate-x-[-50%]"
+                className="mt-6 md:mt-16 relative left-[50%] translate-x-[-50%]"
                 style={{
-                  width: "clamp(200px, calc(864 / 1920 * 100vw), 864px)",
+                  width: "clamp(200px, calc(900 / 1920 * 100vw), 900px)",
                 }}
               >
                 <div className="text-center mb-3 border-[1px] border-[#f5be66] rounded-lg pl-4 md:pl-16 pr-4 py-2">
-                  <h1 className="text-base md:text-xl font-bold text-[#f5be66] mb-1">
-                    Today's Tarot : {todayCard.name} [{todayCard.position}]
+                  <h1 className="text-xl md:text-2xl font-bold text-[#f5be66] mb-1">
+                    Today's Tarot : {todayCard.name}
+                    {/* [{todayCard.position}] */}
                   </h1>
-                  <p className="text-[#f5be66] mt-1 max-w-md mx-auto text-xs md:text-sm">
+                  <p className="text-[#f5be66] mt-1 max-w-md mx-auto text-base md:text-xl">
                     {todayCard.prediction}
                   </p>
                 </div>
@@ -342,22 +343,23 @@ export default function App() {
                         <div
                           className="bg-black/50 border-2 mt-2 border-yellow-400 rounded-lg p-4 w-full overflow-y-auto"
                           style={{
-                            aspectRatio: "220/200",
+                            aspectRatio: "220/230",
                             width:
                               "clamp(220px, calc(220 / 1920 * 100vw), 220px)",
                           }}
                         >
-                          <div className="space-y-2 text-left">
+                          <div className="space-y-1 text-left">
                             <h3 className="font-bold text-yellow-400 text-2xl text-center mb-3">
                               {asset.symbol}
                             </h3>
-                            <div className="space-y-2 text-xs">
+                            <div className="space-y-1 text-sm">
                               <div>
                                 <span className="text-white font-medium">
                                   Card:{" "}
                                 </span>
                                 <span className="text-gray-300">
-                                  {asset.cardName} [{asset.position}]
+                                  {asset.cardName}
+                                  {/* [{asset.position}] */}
                                 </span>
                               </div>
                               <div>
