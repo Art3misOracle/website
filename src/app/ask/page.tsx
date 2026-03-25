@@ -52,7 +52,7 @@ function Ask() {
       throw new Error("no account");
     }
     const transactionToSign = await aptosClient().transaction.build.simple({
-      sender: account.address,
+      sender: account.address.toString(),
       withFeePayer: true,
       data: {
         function: `${MODULE_ADDRESS}::tarot::draws_card`,
@@ -76,7 +76,7 @@ function Ask() {
       throw new Error("no account");
     }
     const transactionToSign = await aptosClient().transaction.build.simple({
-      sender: account.address,
+      sender: account.address.toString(),
       withFeePayer: true,
       data: {
         function: `${MODULE_ADDRESS}::tarot::mint_card`,
@@ -93,7 +93,7 @@ function Ask() {
   };
   const onSubmitTransaction = async () => {
     const transaction = await generateTransaction();
-    const senderAuthenticator = await signTransaction(transaction);
+    const { authenticator: senderAuthenticator } = await signTransaction({ transactionOrPayload: transaction });
     const feePayerAuthenticator =
       await aptosClient().transaction.signAsFeePayer({
         signer: sponsor,
@@ -129,7 +129,7 @@ function Ask() {
 
   const onSubmitMintTransaction = async (args: MintCardArguments) => {
     const transaction = await generateMintTransaction(args);
-    const senderAuthenticator = await signTransaction(transaction);
+    const { authenticator: senderAuthenticator } = await signTransaction({ transactionOrPayload: transaction });
     const feePayerAuthenticator =
       await aptosClient().transaction.signAsFeePayer({
         signer: sponsor,

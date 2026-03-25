@@ -24,7 +24,8 @@ import {
   // APTOS_CONNECT_ACCOUNT_URL,
   AboutAptosConnect,
   type AboutAptosConnectEducationScreen,
-  type AnyAptosWallet,
+  type AdapterWallet,
+  type AdapterNotDetectedWallet,
   AptosPrivacyPolicy,
   WalletItem,
   groupAndSortWallets,
@@ -58,7 +59,7 @@ export function WalletSelector() {
   const copyAddress = useCallback(async () => {
     if (!account?.address) return;
     try {
-      await navigator.clipboard.writeText(account.address);
+      await navigator.clipboard.writeText(account.address.toString());
       toast({
         title: "Success",
         description: "Copied wallet address to clipboard.",
@@ -80,7 +81,7 @@ export function WalletSelector() {
       if (account?.address) {
         try {
           const bal = await getAccountAPTBalance({
-            accountAddress: account.address,
+            accountAddress: account.address.toString(),
           });
           setBalance(bal);
         } catch (error) {
@@ -180,7 +181,7 @@ export function WalletSelector() {
               </div>
               <div className="flex items-center justify-between gap-2">
                 <span className="text-[#df966a] text-14">
-                  {truncateAddress(account?.address)}
+                  {truncateAddress(account?.address?.toString())}
                 </span>{" "}
                 <button
                   onClick={copyAddress}
@@ -302,9 +303,9 @@ interface ConnectWalletDialogProps {
 }
 
 function ConnectWalletDialog({ close }: ConnectWalletDialogProps) {
-  const { wallets = [] } = useWallet();
+  const { wallets = [], notDetectedWallets = [] } = useWallet();
   const { aptosConnectWallets, availableWallets, installableWallets } =
-    groupAndSortWallets(wallets);
+    groupAndSortWallets([...wallets, ...notDetectedWallets]);
 
   const hasAptosConnectWallets = !!aptosConnectWallets.length;
 
@@ -384,7 +385,7 @@ function ConnectWalletDialog({ close }: ConnectWalletDialogProps) {
 }
 
 interface WalletRowProps {
-  wallet: AnyAptosWallet;
+  wallet: AdapterWallet | AdapterNotDetectedWallet;
   onConnect?: () => void;
 }
 

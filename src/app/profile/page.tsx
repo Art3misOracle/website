@@ -39,7 +39,7 @@ export default function Profile() {
 
       try {
         setLoading(true);
-        const response = await getNFTs(account.address);
+        const response = await getNFTs(account.address.toString());
         console.log("test233", response);
 
         setCards(response);
