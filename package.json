@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
+  "packageManager": "pnpm@8.4.0",
   "scripts": {
     "move:test": "node ./scripts/move/test",
     "move:compile": "node ./scripts/move/compile",

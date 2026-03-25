@@ -1,3 +1,4 @@
 {
+  "installCommand": "pnpm install --frozen-lockfile",
   "routes": [{ "src": "/api/(.*)", "dest": "app/api/$1" }]
 }
