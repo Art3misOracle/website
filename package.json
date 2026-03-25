@@ -57,5 +57,10 @@
     "tree-kill": "1.2.2",
     "typescript": "^5.2.2",
     "vercel": "^35.2.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "@aptos-labs/ts-sdk": "^6.3.1"
+    }
   }
 }
